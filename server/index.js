@@ -1,20 +1,25 @@
 /**
  * Entry Point
- * Starts the Express server
+ *
+ * 1. Connecting to databases
+ * 2. Starts the Express server
  */
 import app from "./src/server.js";
+import { serverConfig } from "./src/config/server.js";
 
-const PORT = 3000;
-const HOST = "http://localhost";
+const HOST = serverConfig.host;
+const PORT = serverConfig.port;
 
 /**
  * Start server after initializing databases
  */
 async function startServer() {
   try {
+    // In the future, init databases...
+
     // Start Express server
     app.listen(PORT, () => {
-      console.log(`✔ Riddles server running on ${HOST}:${PORT}`);
+      console.log(`✔ LinKodkod server running on http://${HOST}:${PORT}`);
     });
   } catch (error) {
     console.error("✘ Failed to start server:", error);
