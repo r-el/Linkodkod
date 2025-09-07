@@ -1,17 +1,7 @@
-// To load the date:
-//
-// save the timestamp:
-// { type:'date', 'min':(new Date()).getTime() }
-// then you read it back:
-//
-// var result = JSON.parse('{ "type":"date", "min":1234567 }');
-// result.date = new Date(result.min);
-// Note: the server you use to serialize it and the server you use to deserialize it has to run in the same timezone
-// src: https://stackoverflow.com/questions/35225707/store-new-date-in-json-object#:~:text=3-,save%20the%20timestamp%3A,-%7B%20type%3A
 
-import type { PostProps } from "../components/post/PostProps";
+import type { PostEntity } from "../components/post/PostEntity";
 
-export const posts: PostProps[] = [
+export const posts: PostEntity[] = [
   {
     id: 1,
     imgSrc: "/vite.svg",
