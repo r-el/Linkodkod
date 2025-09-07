@@ -1,17 +1,14 @@
 import "./App.css";
 import { Post } from "./components/post/Post";
+import type { PostProps } from "./components/post/PostProps.js";
+import { posts } from "./data/postsData.js";
 
-export default () => (
-  <>
-    <Post
-      id={0}
-      imgSrc={"/linkodkod.jpg"}
-      description={
-        "descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription"
-      }
-      likes={0}
-      author={"Ariel"}
-      createdAt={new Date()}
-    ></Post>
-  </>
-);
+export default () => {
+  return (
+    <>
+      {posts.map((p: PostProps) => (
+        <Post key={p.id} {...p}></Post>
+      ))}
+    </>
+  );
+};
