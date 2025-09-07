@@ -1,4 +1,4 @@
-export interface PostProps {
+export interface PostEntity {
   id: number;
   imgSrc: string;
   description: string;
