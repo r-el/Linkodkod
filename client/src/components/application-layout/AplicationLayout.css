@@ -1,0 +1,13 @@
+#layout {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+#main-content {
+  flex-grow: 1;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
