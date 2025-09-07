@@ -5,7 +5,7 @@ export default () => (
   <>
     <Post
       id={0}
-      imgSrc={"./assets/linkodkod.jpg"}
+      imgSrc={"/linkodkod.jpg"}
       description={
         "descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription"
       }
