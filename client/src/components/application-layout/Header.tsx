@@ -6,12 +6,7 @@ import Slogan from "./Slogan";
 export default () => {
   return (
     <header id="header">
-      {/* Logo */}
-      <Link to="/" id="logo">
-        <Logo />{" "}
-      </Link>
-
-      {/* Slogan */}
+      <Logo />
       <Slogan />
     </header>
   );

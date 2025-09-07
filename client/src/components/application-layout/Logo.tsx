@@ -1,2 +1,7 @@
 import "./Logo.css";
-export default () => <h1>LinKodkod</h1>;
+import { Link } from "react-router-dom";
+export default () => (
+  <Link id="logo" to="/">
+    <h1>LinKodkod</h1>
+  </Link>
+);
