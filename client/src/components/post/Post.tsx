@@ -1,8 +1,8 @@
 import "./Post.css";
 import React from "react";
-import type { PostProps } from "./PostProps";
+import type { PostEntity } from "./PostEntity";
 
-export const Post: React.FC<PostProps> = ({ id, imgSrc, description, likes, author, createdAt }) => {
+export const Post: React.FC<PostEntity> = ({ id, imgSrc, description, likes, author, createdAt }) => {
   return (
     <div id={"" + id} className="post">
       {/* {TODO: fix image} */}
