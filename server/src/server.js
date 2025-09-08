@@ -12,7 +12,9 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
 // Routes
 import rootRoutes from "./routes/rootRoutes.js";
+import postsRouter from "./routes/postRoutes.js";
 
 app.use("/", rootRoutes);
+app.use("/posts", postsRouter);
 
 export default app;
