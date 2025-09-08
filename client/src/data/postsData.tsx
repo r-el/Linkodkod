@@ -1,7 +1,7 @@
 
-import type { IPost } from "../@types/Post";
+import type { PostEntity } from "../components/post/PostEntity";
 
-export const posts: IPost[] = [
+export const posts: PostEntity[] = [
   {
     id: 1,
     imgSrc: "/vite.svg",
