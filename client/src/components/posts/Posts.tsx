@@ -6,6 +6,7 @@ import { getAllPosts } from "../../services/postService";
 
 export const Posts = () => {
   const [posts, setPosts] = useState<IPost[]>([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -22,14 +23,16 @@ export const Posts = () => {
       } catch (error) {
         console.error("Error fetching posts: ", error);
         setError("Error during fetch posts, please try again");
+      } finally {
+        setLoading(false);
       }
     };
     fetchPosts();
   }, []);
 
-  if (error) {
-    return <p className="error">{error}</p>;
-  }
+  if (loading) return <div>Loading...</div>;
+  if (error) return <p className="error">{error}</p>;
+
   return (
     <div id="posts-container">
       {posts && posts.length > 0 && posts.map((p: IPost) => <Post key={p.id} {...p}></Post>)}
