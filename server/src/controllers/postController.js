@@ -14,9 +14,9 @@ export async function addPostController(req, res) {
     const post = new Post(req.body);
     const created = await addPost(post);
 
-    res.status(201).json({ success: true, data: created, message: "Post added successfully" });
+    res.status(201).json({ data: created, message: "Post added successfully" });
   } catch (err) {
-    res.status(500).json({ success: false, err: "Failed to add post. " + err.message });
+    res.status(500).json({ err: "Failed to add post. " + err.message });
   }
 }
 
@@ -29,9 +29,9 @@ export async function addPostController(req, res) {
 export async function getAllPostsController(req, res) {
   try {
     const posts = await getAllPosts();
-    res.status(200).json({ success: true, data: posts });
+    res.status(200).json(posts);
   } catch (err) {
-    res.status(500).json({ success: false, err: "Failed to fetch posts: " + err.message });
+    res.status(500).json({ err: "Failed to fetch posts: " + err.message });
   }
 }
 
@@ -47,9 +47,9 @@ export async function getPostController(req, res) {
   try {
     const id = parseInt(postId);
     const post = await getPostById(id);
-    res.status(200).json({ success: true, data: post });
+    res.status(200).json(post);
   } catch (err) {
-    res.status(500).json({ success: false, err: "Failed to fetch post: " + err.message });
+    res.status(500).json({ err: "Failed to fetch post: " + err.message });
   }
 }
 
@@ -68,9 +68,9 @@ export async function updatePostController(req, res) {
     const id = parseInt(postId);
     const post = new Post({ id, imgSrc, description, likes, author, createdAt });
     const updated = await updatePost(id, post);
-    res.status(201).json({ success: true, data: updated, message: "Post updated successfully" });
+    res.status(201).json({ data: updated, message: "Post updated successfully" });
   } catch (err) {
-    res.status(500).json({ success: false, err: "Failed to update post. " + err.message });
+    res.status(500).json({ err: "Failed to update post. " + err.message });
   }
 }
 
@@ -87,8 +87,8 @@ export async function deletePostController(req, res) {
   try {
     const id = parseInt(postId);
     const deleted = await deletePost(id);
-    res.status(200).json({ success: true, data: deleted, message: "Post deleted successfully" });
+    res.status(200).json({ data: deleted, message: "Post deleted successfully" });
   } catch (err) {
-    res.status(500).json({ success: false, err: "Failed to delete post. " + err.message });
+    res.status(500).json({ err: "Failed to delete post. " + err.message });
   }
 }
