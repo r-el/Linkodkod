@@ -11,6 +11,8 @@ export default () => {
       <Routes>
         <Route index element={<Posts />} />
         <Route path="/post/:id" element={<PostDetailPage />} />
+        <Route path="/login" element={<h2>Login Page</h2>} />
+        <Route path="/register" element={<h2>Register Page</h2>} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </AplicationLayout>
