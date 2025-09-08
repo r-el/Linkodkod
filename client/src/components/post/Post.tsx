@@ -21,7 +21,7 @@ export const Post: React.FC<IPost> = ({ id, imgSrc, description, likes, author, 
         by {(author && author) || "Unknown"}
         {createdAt && createdAt instanceof Date && ", " + createdAt.toLocaleString()}
       </h4>
-      <h4>likes: {(likes && likes) || 0}</h4>
+      {likes && <h4>likes: {likes}</h4>}
       {description && <p>{description}</p>}
     </div>
   );
