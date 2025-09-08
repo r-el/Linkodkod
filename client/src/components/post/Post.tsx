@@ -1,6 +1,7 @@
 import "./Post.css";
 import React from "react";
 import type { IPost } from "../../@types/Post";
+import { Link } from "react-router-dom";
 
 export const Post: React.FC<IPost> = ({ id, imgSrc, description, likes, author, createdAt }) => {
   return (
@@ -23,6 +24,7 @@ export const Post: React.FC<IPost> = ({ id, imgSrc, description, likes, author, 
       </h4>
       {likes && <h4>likes: {likes}</h4>}
       {description && <p>{description}</p>}
+      <Link to={`/post/${id}`}>To Post Details</Link>
     </div>
   );
 };
