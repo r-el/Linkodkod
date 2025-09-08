@@ -2,6 +2,8 @@
  * Express Application Setup
  */
 import express from "express";
+import cors from "cors";
+import { corsConfig } from "./config/cors.js";
 
 // Get current directory (ES modules equivalent of __dirname)
 import path from "path";
@@ -11,6 +13,9 @@ const __dirname = path.dirname(__filename);
 
 // Create Express application
 const app = express();
+
+// CORS configuration
+app.use(cors(corsConfig));
 
 // Serve static files
 app.use(express.static(path.join(__dirname, "public")));

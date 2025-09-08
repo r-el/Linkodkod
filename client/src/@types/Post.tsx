@@ -1,4 +1,4 @@
-export interface PostEntity {
+export interface IPost {
   id: number;
   imgSrc: string;
   description: string;
