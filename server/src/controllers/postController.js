@@ -21,14 +21,10 @@ export const addPostController = catchAsync(async (req, res) => {
  * @param {IncomingMessage} req
  * @param {ServerResponse} res
  */
-export async function getAllPostsController(req, res) {
-  try {
-    const posts = await getAllPosts();
-    res.status(200).json({ success: true, data: posts });
-  } catch (err) {
-    res.status(500).json({ success: false, err: "Failed to fetch posts: " + err.message });
-  }
-}
+export const getAllPostsController = catchAsync(async (req, res) => {
+  const posts = await getAllPosts();
+  res.status(200).json({ success: true, data: posts });
+});
 
 /**
  * Controller: Get post By id
