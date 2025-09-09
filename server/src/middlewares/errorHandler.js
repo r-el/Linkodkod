@@ -7,6 +7,10 @@
  * @param {boolean} isOperational - Indicates if the error is operational (true) or program error (false)
  */
 
+import { serverConfig } from "../config/server.js";
+
+const ENVIRONMENT = serverConfig.environment;
+
 class ApiError extends Error {
   constructor(statusCode, message, isOperational = true) {
     super(message);
