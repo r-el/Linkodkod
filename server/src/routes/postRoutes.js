@@ -10,8 +10,8 @@ import {
   updatePostController,
   deletePostController,
 } from "../controllers/postController.js";
-import { validateBody, validateQuery } from "../middlewares/validations.js";
-import { createPostSchema, idQuerySchema } from "../schemas/postSchemas.js";
+import { validateBody, validateParams } from "../middlewares/validations.js";
+import { createPostSchema, idParamsSchema } from "../schemas/postSchemas.js";
 
 const router = express.Router();
 
@@ -22,7 +22,7 @@ router.post("/", validateBody(createPostSchema), addPostController);
 router.get("/", getAllPostsController);
 
 // GET /posts:id
-router.get("/:id", validateQuery(idQuerySchema), getPostController);
+router.get("/:id", validateParams(idParamsSchema), getPostController);
 
 // PUT /posts/:id
 router.put("/:id", updatePostController);
