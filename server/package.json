@@ -19,5 +19,8 @@
     "joi": "^18.0.1",
     "json-file-crud": "^1.2.0",
     "supertest": "^7.1.4"
+  },
+  "devDependencies": {
+    "vitest": "^3.2.4"
   }
 }
