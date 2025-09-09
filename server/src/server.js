@@ -18,6 +18,7 @@ const app = express();
 
 // Security
 app.use(helmet()); // Help secure Express apps by setting HTTP response headers.
+app.disable("x-powered-by");
 
 // CORS configuration
 app.use(cors(corsConfig));
