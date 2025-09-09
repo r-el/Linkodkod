@@ -4,13 +4,13 @@ import type { IPost } from "../@types/Post";
 interface GetAllPostsResponse {
   success: boolean;
   data?: IPost[];
-  err?: string;
+  error?: string;
 }
-
+// TODO: DRY
 interface GetPostByIdResponse {
   success: boolean;
   data?: IPost;
-  err?: string;
+  error?: string;
 }
 
 // Posts API calls
