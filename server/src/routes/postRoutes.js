@@ -25,9 +25,9 @@ router.get("/", getAllPostsController);
 router.get("/:id", validateParams(idParamsSchema), getPostController);
 
 // PUT /posts/:id
-router.put("/:id", updatePostController);
+router.put("/:id", validateParams(idParamsSchema), updatePostController);
 
 // DELETE /posts/:id
-router.delete("/:id", deletePostController);
+router.delete("/:id", validateParams(idParamsSchema), deletePostController);
 
 export default router;
