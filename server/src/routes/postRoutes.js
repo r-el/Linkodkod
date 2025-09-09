@@ -6,7 +6,7 @@ import express from "express";
 import {
   addPostController,
   getAllPostsController,
-  getPostController,
+  getPostByIdController,
   updatePostController,
   deletePostController,
 } from "../controllers/postController.js";
@@ -22,7 +22,7 @@ router.post("/", validateBody(createPostSchema), addPostController);
 router.get("/", getAllPostsController);
 
 // GET /posts:id
-router.get("/:id", validateParams(idParamsSchema), getPostController);
+router.get("/:id", validateParams(idParamsSchema), getPostByIdController);
 
 // PUT /posts/:id
 router.put("/:id", validateParams(idParamsSchema), updatePostController);

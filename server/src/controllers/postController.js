@@ -32,7 +32,7 @@ export const getAllPostsController = catchAsync(async (req, res) => {
  * @param {IncomingMessage} req
  * @param {ServerResponse} res
  */
-export const getPostController = catchAsync(async (req, res) => {
+export const getPostByIdController = catchAsync(async (req, res) => {
   // TODO: Add validations
   const postId = req.params.id;
   const id = parseInt(postId);
