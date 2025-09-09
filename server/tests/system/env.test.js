@@ -1,10 +1,12 @@
-// TODO: fix the ES6 problem with jest
-require("dotenv").config();
+import { test, expect } from "vitest";
 
-require("../../src/config/server.js").serverConfig;
-require("../../src/config/cors.js:corsConfig");
-require("../../src/config/database.js:databaseConfig");
+import { config } from "dotenv";
+config();
+import { serverConfig } from "../../src/config/server.js";
+import { corsConfig } from "../../src/config/cors.js";
+import { databaseConfig } from "../../src/config/database.js";
 
+// check only if the environment variables are defined or not
 test(".env | Server configuration", async () => {
   const HOST = serverConfig.host;
   const PORT = serverConfig.port;
@@ -28,9 +30,9 @@ test(".env | Database configuration", async () => {
   const ID_FILED = databaseConfig.options.idField;
   const UINQUE_FIELDS = databaseConfig.options.uniqueFields;
 
+  expect(!!POST_FILE_PATH).toBeTruthy();
   expect(!!OPTION).toBeTruthy();
   expect(!!AUTO_ID).toBeTruthy();
   expect(!!ID_FILED).toBeTruthy();
   expect(!!UINQUE_FIELDS).toBeTruthy();
 });
-// ....so on [basically i am just checking if they are defined or not]
