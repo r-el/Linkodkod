@@ -7,6 +7,9 @@ export default () => (
         <Link to={"/"}>Home</Link>
       </li>
       <li>
+        <Link to={"/post/new"}>New Post</Link>
+      </li>
+      <li>
         <Link to={"/login"}>Login</Link>
       </li>
       <li>

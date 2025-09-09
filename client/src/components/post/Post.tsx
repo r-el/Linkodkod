@@ -4,8 +4,15 @@ import type { IPost } from "../../@types/Post";
 import { Link } from "react-router-dom";
 
 export const Post: React.FC<IPost> = ({ id, imgSrc, description, likes, author, createdAt }) => {
+  const timestamps: number = Date.parse(createdAt);
+  const date = new Date(timestamps);
   return (
     <div id={"" + id} className="post">
+      <h4>
+        by {(author && author) || "Unknown"}
+        {date && ", " + date.toLocaleString()}
+      </h4>
+      {likes && <h6>{likes} likes</h6>}
       {/* {TODO: fix image} */}
       {imgSrc && (
         <img
@@ -18,11 +25,6 @@ export const Post: React.FC<IPost> = ({ id, imgSrc, description, likes, author, 
           }}
         />
       )}
-      <h4>
-        by {(author && author) || "Unknown"}
-        {createdAt && createdAt instanceof Date && ", " + createdAt.toLocaleString()}
-      </h4>
-      {likes && <h4>likes: {likes}</h4>}
       {description && <p>{description}</p>}
       <Link to={`/post/${id}`}>To Post Details</Link>
     </div>

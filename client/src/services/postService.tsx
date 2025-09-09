@@ -4,13 +4,13 @@ import type { IPost } from "../@types/Post";
 interface GetAllPostsResponse {
   success: boolean;
   data?: IPost[];
-  err?: string;
+  error?: string;
 }
-
+// TODO: DRY
 interface GetPostByIdResponse {
   success: boolean;
   data?: IPost;
-  err?: string;
+  error?: string;
 }
 
 // Posts API calls
@@ -21,5 +21,14 @@ export const getAllPosts = async (): Promise<GetAllPostsResponse> => {
 
 export const getPostById = async (id: string): Promise<GetPostByIdResponse> => {
   const response = await api.get(`/posts/${id}`);
+  return response.data;
+};
+
+export const creaetNewPost = async (
+  author: string,
+  description: string,
+  imgSrc: string
+): Promise<GetPostByIdResponse> => {
+  const response = await api.post(`/posts`, { author, description, imgSrc });
   return response.data;
 };

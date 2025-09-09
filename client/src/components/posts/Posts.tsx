@@ -18,7 +18,7 @@ export const Posts = () => {
           const postsData = response.data;
           setPosts(postsData);
         } else {
-          setError(response.err || "Failed to fetch posts");
+          setError(response.error || "Failed to fetch posts");
         }
       } catch (error) {
         console.error("Error fetching posts: ", error);

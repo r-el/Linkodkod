@@ -24,7 +24,7 @@ export const PostDetailPage = () => {
           const postData = response.data;
           setPost(postData);
         } else {
-          setError(response.err || `Failed to fetch post${id && ` (id: ${id})`}.`);
+          setError(response.error || `Failed to fetch post${id && ` (id: ${id})`}.`);
         }
       } catch (error) {
         console.error("Error fetching post: ", error);
@@ -42,8 +42,15 @@ export const PostDetailPage = () => {
 
   const { imgSrc, description, likes, author, createdAt } = post;
 
+  const timestamps: number = Date.parse(createdAt);
+  const date = new Date(timestamps);
   return (
     <div id="post-detail">
+      <h4>
+        by {(author && author) || "Unknown"}
+        {date && ", " + date.toLocaleString()}
+      </h4>
+      {likes && <h6>{likes} likes</h6>}
       {/* {TODO: fix image} */}
       {imgSrc && (
         <img
@@ -56,11 +63,6 @@ export const PostDetailPage = () => {
           }}
         />
       )}
-      <h4>
-        by {(author && author) || "Unknown"}
-        {createdAt && createdAt instanceof Date && ", " + createdAt.toLocaleString()}
-      </h4>
-      <h4>likes: {(likes && likes) || 0}</h4>
       {description && <p>{description}</p>}
     </div>
   );
