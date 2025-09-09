@@ -63,15 +63,11 @@ export const updatePostController = catchAsync(async (req, res) => {
  * @param {IncomingMessage} req
  * @param {ServerResponse} res
  */
-export async function deletePostController(req, res) {
+export const deletePostController = catchAsync(async (req, res) => {
   // TODO: Add validations
   const postId = req.params.id;
 
-  try {
-    const id = parseInt(postId);
-    const deleted = await deletePost(id);
-    res.status(200).json({ success: true, data: deleted, message: "Post deleted successfully" });
-  } catch (err) {
-    res.status(500).json({ success: false, err: "Failed to delete post. " + err.message });
-  }
-}
+  const id = parseInt(postId);
+  const deleted = await deletePost(id);
+  res.status(200).json({ success: true, data: deleted, message: "Post deleted successfully" });
+});
