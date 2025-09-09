@@ -4,6 +4,7 @@
 import express from "express";
 import cors from "cors";
 import { corsConfig } from "./config/cors.js";
+import { globalErrorHandler } from "./middlewares/errorHandler.js";
 
 // Get current directory (ES modules equivalent of __dirname)
 import path from "path";
@@ -30,5 +31,8 @@ import postsRouter from "./routes/postRoutes.js";
 
 app.use("/", rootRoutes);
 app.use("/posts", postsRouter);
+
+// Global error handling middleware - must be last
+app.use(globalErrorHandler);
 
 export default app;
