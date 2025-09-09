@@ -24,7 +24,7 @@ export const PostDetailPage = () => {
           const postData = response.data;
           setPost(postData);
         } else {
-          setError(response.err || `Failed to fetch post${id && ` (id: ${id})`}.`);
+          setError(response.error || `Failed to fetch post${id && ` (id: ${id})`}.`);
         }
       } catch (error) {
         console.error("Error fetching post: ", error);
