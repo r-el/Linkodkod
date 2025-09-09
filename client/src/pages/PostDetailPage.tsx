@@ -50,6 +50,7 @@ export const PostDetailPage = () => {
         by {(author && author) || "Unknown"}
         {date && ", " + date.toLocaleString()}
       </h4>
+      {likes && <h6>{likes} likes</h6>}
       {/* {TODO: fix image} */}
       {imgSrc && (
         <img
@@ -62,7 +63,6 @@ export const PostDetailPage = () => {
           }}
         />
       )}
-      <h4>likes: {(likes && likes) || 0}</h4>
       {description && <p>{description}</p>}
     </div>
   );
