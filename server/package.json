@@ -9,14 +9,6 @@
     "dev": "node --watch index.js",
     "test": "NODE_ENV=test npx jest"
   },
-  "jest": {
-    "testTimeout": 300000,
-    "collectCoverage": true,
-    "coverageReporters": [
-      "json",
-      "html"
-    ]
-  },
   "author": "r-el",
   "license": "ISC",
   "dependencies": {
