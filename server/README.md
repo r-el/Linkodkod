@@ -17,3 +17,11 @@ All POST endpoints return an object.
 An object will definitely have the `success` and `data` keys.
 </br>
 In operation that changes values ​​such as POST, PUT and DELETE, If the operation was successful, the `message` key will also be added
+
+## Tests
+
+To run test for the server, run the following command:
+
+```bash
+npm test
+```
