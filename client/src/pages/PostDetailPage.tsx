@@ -42,8 +42,14 @@ export const PostDetailPage = () => {
 
   const { imgSrc, description, likes, author, createdAt } = post;
 
+  const timestamps: number = Date.parse(createdAt);
+  const date = new Date(timestamps);
   return (
     <div id="post-detail">
+      <h4>
+        by {(author && author) || "Unknown"}
+        {date && ", " + date.toLocaleString()}
+      </h4>
       {/* {TODO: fix image} */}
       {imgSrc && (
         <img
@@ -56,10 +62,6 @@ export const PostDetailPage = () => {
           }}
         />
       )}
-      <h4>
-        by {(author && author) || "Unknown"}
-        {createdAt && createdAt instanceof Date && ", " + createdAt.toLocaleString()}
-      </h4>
       <h4>likes: {(likes && likes) || 0}</h4>
       {description && <p>{description}</p>}
     </div>
