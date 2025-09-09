@@ -47,6 +47,12 @@ const globalErrorHandler = (err, req, res, next) => {
     ip: req.ip,
   });
 
+  // Joi validation error
+  if (err.isJoi) {
+    const message = err.details.map((detail) => detail.message).join(", ");
+    error = new ApiError(400, message);
+  }
+
   // Send error response
   res.status(error.statusCode || 500).json({
     success: false,
