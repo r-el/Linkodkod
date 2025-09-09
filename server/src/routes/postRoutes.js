@@ -10,11 +10,13 @@ import {
   updatePostController,
   deletePostController,
 } from "../controllers/postController.js";
+import { validateBody } from "../middlewares/validations.js";
+import { createPostSchema } from "../schemas/postSchemas.js";
 
 const router = express.Router();
 
 // POST /posts
-router.post("/", addPostController);
+router.post("/", validateBody(createPostSchema), addPostController);
 
 // GET /posts
 router.get("/", getAllPostsController);
