@@ -21,4 +21,9 @@ class ApiError extends Error {
   }
 }
 
-export { ApiError };
+/**
+ * Async error wrapper
+ */
+const catchAsync = (fn) => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
+
+export { ApiError, catchAsync };
