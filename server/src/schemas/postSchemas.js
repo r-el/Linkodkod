@@ -13,6 +13,6 @@ export const createPostSchema = Joi.object({
   createdAt: Joi.date().iso().default(new Date().toISOString()), // TODO: The server will be responsible for generating the post time
 });
 
-export const idQuerySchema = Joi.object({
+export const idParamsSchema = Joi.object({
   id: Joi.number().integer().positive().required(),
 });
