@@ -32,17 +32,13 @@ export const getAllPostsController = catchAsync(async (req, res) => {
  * @param {IncomingMessage} req
  * @param {ServerResponse} res
  */
-export async function getPostController(req, res) {
+export const getPostController = catchAsync(async (req, res) => {
   // TODO: Add validations
   const postId = req.params.id;
-  try {
-    const id = parseInt(postId);
-    const post = await getPostById(id);
-    res.status(200).json({ success: true, data: post });
-  } catch (err) {
-    res.status(500).json({ success: false, err: "Failed to fetch post: " + err.message });
-  }
-}
+  const id = parseInt(postId);
+  const post = await getPostById(id);
+  res.status(200).json({ success: true, data: post });
+});
 
 /**
  * Controller: Update an existing post
