@@ -4,5 +4,5 @@ export interface IPost {
   description: string;
   likes: number;
   author: string;
-  createdAt: Date;
+  createdAt: string;
 }
