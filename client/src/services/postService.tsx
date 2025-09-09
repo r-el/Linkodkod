@@ -23,3 +23,12 @@ export const getPostById = async (id: string): Promise<GetPostByIdResponse> => {
   const response = await api.get(`/posts/${id}`);
   return response.data;
 };
+
+export const creaetNewPost = async (
+  author: string,
+  description: string,
+  imgSrc: string
+): Promise<GetPostByIdResponse> => {
+  const response = await api.post(`/posts`, { author, description, imgSrc });
+  return response.data;
+};
