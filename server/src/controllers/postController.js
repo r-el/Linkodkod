@@ -1,24 +1,19 @@
 import { Post } from "../models/Post.js";
 import { addPost, getAllPosts, getPostById, updatePost, deletePost } from "../dal/postsDAL.js";
-
+import { catchAsync } from "../middlewares/errorHandler.js";
 /**
  * Controller: Add a new post
  * @route POST /posts
  * @param {IncomingMessage} req
  * @param {ServerResponse} res
  */
-export async function addPostController(req, res) {
+export const addPostController = catchAsync(async (req, res) => {
   // TODO: Add validations
+  const post = new Post(req.body);
+  const created = await addPost(post);
 
-  try {
-    const post = new Post(req.body);
-    const created = await addPost(post);
-
-    res.status(201).json({ success: true, data: created, message: "Post added successfully" });
-  } catch (err) {
-    res.status(500).json({ success: false, err: "Failed to add post. " + err.message });
-  }
-}
+  res.status(201).json({ success: true, data: created, message: "Post added successfully" });
+});
 
 /**
  * Controller: Get all posts
