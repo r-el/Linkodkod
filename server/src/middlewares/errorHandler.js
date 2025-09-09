@@ -23,7 +23,32 @@ class ApiError extends Error {
 
 /**
  * Async error wrapper
+ * Catches async errors and passes them to error handler
  */
 const catchAsync = (fn) => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
 
-export { ApiError, catchAsync };
+/**
+ * Global error handling middleware
+ */
+const globalErrorHandler = (err, req, res, next) => {
+  let error = { ...err };
+  error.message = err.message;
+
+  // Log error details
+  console.error(`${new Date().toISOString()} - ERROR:`, {
+    message: error.message,
+    stack: err.stack,
+    url: req.originalUrl,
+    method: req.method,
+    ip: req.ip,
+  });
+
+  // Send error response
+  res.status(error.statusCode || 500).json({
+    success: false,
+    error: error.message || "Internal server error",
+    ...(ENVIRONMENT === "development" && { stack: err.stack }),
+  });
+};
+
+export { ApiError, catchAsync, globalErrorHandler };
