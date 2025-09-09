@@ -7,7 +7,15 @@
   "scripts": {
     "start": "node index.js",
     "dev": "node --watch index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_ENV=test npx jest"
+  },
+  "jest": {
+    "testTimeout": 300000,
+    "collectCoverage": true,
+    "coverageReporters": [
+      "json",
+      "html"
+    ]
   },
   "author": "r-el",
   "license": "ISC",
