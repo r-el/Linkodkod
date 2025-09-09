@@ -20,3 +20,22 @@ export const validateBody = (schema) => {
     next();
   };
 };
+
+/**
+ * Validates query parameters against Joi schema
+ */
+export const validateQuery = (schema) => {
+  return (req, res, next) => {
+    const { error, value } = schema.validate(req.query, {
+      abortEarly: false,
+      stripUnknown: true,
+    });
+
+    if (error) {
+      return next(error);
+    }
+
+    req.query = value;
+    next();
+  };
+};
