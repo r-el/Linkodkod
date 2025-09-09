@@ -24,9 +24,9 @@ export const validateBody = (schema) => {
 /**
  * Validates query parameters against Joi schema
  */
-export const validateQuery = (schema) => {
+export const validateParams = (schema) => {
   return (req, res, next) => {
-    const { error, value } = schema.validate(req.query, {
+    const { error, value } = schema.validate(req.params, {
       abortEarly: false,
       stripUnknown: true,
     });
@@ -35,7 +35,8 @@ export const validateQuery = (schema) => {
       return next(error);
     }
 
-    req.query = value;
+    Object.assign(req.query, value);
+    // req.query = value; will raise error
     next();
   };
 };
