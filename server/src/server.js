@@ -3,6 +3,7 @@
  */
 import express from "express";
 import cors from "cors";
+import helmet from "helmet";
 import { corsConfig } from "./config/cors.js";
 import { globalErrorHandler } from "./middlewares/errorHandler.js";
 
@@ -14,6 +15,9 @@ const __dirname = path.dirname(__filename);
 
 // Create Express application
 const app = express();
+
+// Security
+app.use(helmet()); // Help secure Express apps by setting HTTP response headers.
 
 // CORS configuration
 app.use(cors(corsConfig));
