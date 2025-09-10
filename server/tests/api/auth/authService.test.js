@@ -8,13 +8,13 @@ import * as authService from "../../../src/services/authService.js";
 
 // Mock dependencies
 vi.mock("bcrypt");
-vi.mock("jsonwebtoken");
 
 describe("Authentication Service", () => {
   beforeEach(() => {
     // Set required environment variables for tests
     process.env.JWT_SECRET = "test-jwt-secret-key-for-testing-only";
     process.env.JWT_EXPIRES_IN = "1h";
+    process.env.BCRYPT_SALT_ROUNDS = 10;
   });
 
   describe("hashPassword", () => {
@@ -28,7 +28,7 @@ describe("Authentication Service", () => {
       const result = await authService.hashPassword(password);
 
       // Assert
-      expect(bcrypt.hash).toHaveBeenCalledWith(password, 10);
+      expect(bcrypt.hash).toHaveBeenCalledWith(password, process.env.BCRYPT_SALT_ROUNDS);
       expect(result).toBe(hashedPassword);
     });
 
