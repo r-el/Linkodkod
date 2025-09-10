@@ -10,7 +10,7 @@ import authConfig from "../../../src/config/auth.js";
 // Mock dependencies
 vi.mock("bcrypt");
 
-describe("Authentication Service", () => {
+describe("Authentication Service [Mock]", () => {
   beforeEach(() => {
     // Set required environment variables for tests
     process.env.JWT_SECRET = "test-jwt-secret-key-for-testing-only";
