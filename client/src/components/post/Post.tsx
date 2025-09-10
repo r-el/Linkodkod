@@ -29,7 +29,9 @@ export const Post: React.FC<IPost> = ({ id, imgSrc, description, likes, author, 
         />
       )}
       {description && <p className="description">{description}</p>}
-      <Link to={`/post/${id}`}>To Post Details</Link>
+      <button>
+        <Link to={`/post/${id}`}>To Post Details</Link>
+      </button>
     </div>
   );
 };

@@ -7,6 +7,10 @@
   width: 80vi;
   max-width: 1000px;
   border: 3px solid lightblue;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 25px;
+  background-color: lightblue;
 }
 
 .post-image {
