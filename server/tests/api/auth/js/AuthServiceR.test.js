@@ -7,6 +7,11 @@ describe("Hash Password", () => {
     await expect(authService.hashPassword("")).rejects.toThrow("Password cannot be empty");
   });
 
+  it("should throw error for non-string password", async () => {
+    // Act & Assert
+    await expect(authService.hashPassword(123)).rejects.toThrow("Password must be type of string");
+  });
+
   it("should hash password successfully", async () => {
     // Arrange
     const plainPassword = "testpassword123";
