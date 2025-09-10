@@ -8,14 +8,17 @@ export const Post: React.FC<IPost> = ({ id, imgSrc, description, likes, author, 
   const date = new Date(timestamps);
   return (
     <div id={"" + id} className="post">
-      <h4>
-        by {(author && author) || "Unknown"}
-        {date && ", " + date.toLocaleString()}
+      <h4 className="authod-date-likes">
+        <span>
+          by {(author && author) || "Unknown"}
+          {date && ", " + date.toLocaleString()}
+        </span>
+        <span>{likes && <span>{likes} likes</span>}</span>
       </h4>
-      {likes && <h6>{likes} likes</h6>}
       {/* {TODO: fix image} */}
       {imgSrc && (
         <img
+          className="post-image"
           src={imgSrc}
           alt=""
           // src: https://stackoverflow.com/questions/34097560/react-js-replace-img-src-onerror#:~:text=This%20works%20best%20for%20me
@@ -25,7 +28,7 @@ export const Post: React.FC<IPost> = ({ id, imgSrc, description, likes, author, 
           }}
         />
       )}
-      {description && <p>{description}</p>}
+      {description && <p className="description">{description}</p>}
       <Link to={`/post/${id}`}>To Post Details</Link>
     </div>
   );
