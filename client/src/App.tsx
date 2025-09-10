@@ -8,6 +8,7 @@ import NewPostPage from "./pages/NewPostPage.tsx";
 import Login from "./components/auth/Login.tsx";
 import { AuthProvider } from "./context/AuthContext.tsx";
 import Register from "./components/auth/Register.tsx";
+import HomePage from "./pages/HomePage.tsx";
 
 export default () => {
   return (
@@ -15,7 +16,7 @@ export default () => {
       <Router>
         <AplicationLayout>
           <Routes>
-            <Route index element={<Posts />} />
+            <Route index element={<HomePage />} />
             <Route path="/post">
               <Route path="new" element={<NewPostPage />} />
               <Route path=":id" element={<PostDetailPage />} />
