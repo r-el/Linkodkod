@@ -4,7 +4,7 @@
 import bcrypt from "bcrypt";
 import { authConfig } from "../config/auth.js";
 import jwt from "jsonwebtoken";
-
+import { ApiError } from "../middlewares/errorHandler.js";
 // Configuration constants
 const BCRYPT_SALT_ROUNDS = authConfig.bcryptSaltRounds;
 const DEFAULT_TOKEN_EXPIRATION = authConfig.jwtExpiresIn;
@@ -77,4 +77,29 @@ function generateToken(user) {
   }
 }
 
-export { hashPassword, comparePassword, generateToken };
+/**
+ * Verify and decode a JWT token
+ *
+ * @param {string} token - JWT token to verify
+ * @returns {Object} - Decoded token payload
+ * @throws {ApiError} - If token is invalid or expired
+ */
+function verifyToken(token) {
+  if (!authConfig.jwtSecret) throw new Error("JWT_SECRET not configured in environment variables");
+
+  if (!token || typeof token !== "string") throw new ApiError(401, "Invalid token format");
+
+  try {
+    return jwt.verify(token, authConfig.jwtSecret);
+  } catch (error) {
+    if (error.name === "TokenExpiredError") {
+      throw new ApiError(401, "Token has expired");
+    } else if (error.name === "JsonWebTokenError") {
+      throw new ApiError(401, "Invalid token");
+    } else {
+      throw new ApiError(401, "Token verification failed");
+    }
+  }
+}
+
+export { hashPassword, comparePassword, generateToken, verifyToken };
