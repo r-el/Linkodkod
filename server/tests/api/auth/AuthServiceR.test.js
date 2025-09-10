@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import * as authService from "../../../../src/services/authService.js";
+import * as authService from "../../../src/services/authService.js";
 import bcrypt from "bcrypt";
 
 describe("Hash Password", () => {

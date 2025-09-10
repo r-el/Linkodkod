@@ -19,16 +19,7 @@ describe("Authentication Service", () => {
   });
 
   describe("hashPassword", () => {
-    it("should throw error for empty password", async () => {
-      await expect(authService.hashPassword("")).rejects.toThrow("Password cannot be empty");
-    });
-
-    it("should throw error for non-string password", async () => {
-      // Act & Assert
-      await expect(authService.hashPassword(123)).rejects.toThrow("Password must be type of string");
-    });
-
-    it("should hash password successfully", async () => {
+    it("should hash password successfully [mock]", async () => {
       // Arrange
       const password = "testpassword123";
       const hashedPassword = "$2b$10$hashedversion1234567890123456789012345678901234567890";
