@@ -5,6 +5,7 @@ config();
 import { serverConfig } from "../../src/config/server.js";
 import { corsConfig } from "../../src/config/cors.js";
 import { databaseConfig } from "../../src/config/database.js";
+import { authConfig } from "../../src/config/auth.js";
 
 // check only if the environment variables are defined or not
 test(".env | Server configuration", async () => {
@@ -35,4 +36,17 @@ test(".env | Database configuration", async () => {
   expect(!!AUTO_ID).toBeTruthy();
   expect(!!ID_FILED).toBeTruthy();
   expect(!!UINQUE_FIELDS).toBeTruthy();
+});
+
+test(".env | Authentication configuration", async () => {
+  const JWT_SECRET = authConfig.jwtSecret;
+  const JWT_EXPIRES_IN = authConfig.jwtExpiresIn;
+  const BCRYPT_SALT_ROUNDS = authConfig.bcryptSaltRounds;
+
+  expect(!!JWT_SECRET).toBeTruthy();
+  expect(!!JWT_EXPIRES_IN).toBeTruthy();
+  expect(!!BCRYPT_SALT_ROUNDS).toBeTruthy();
+
+  // expect BCRYPT_SALT_ROUNDS to be number
+  expect(BCRYPT_SALT_ROUNDS).toBeTypeOf("number");
 });
