@@ -33,9 +33,11 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 // Routes
 import rootRoutes from "./routes/rootRoutes.js";
 import postsRouter from "./routes/postRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 
 app.use("/", rootRoutes);
 app.use("/posts", postsRouter);
+app.use("/auth", authRoutes);
 
 // Global error handling middleware - must be last
 app.use(globalErrorHandler);
