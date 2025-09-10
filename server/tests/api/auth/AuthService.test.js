@@ -81,5 +81,12 @@ describe("Authentication Service", () => {
         "hash.length must be 60 characters"
       );
     });
+
+    // TODOS: implement these test cases:
+    // it("should return true for matching passwords", async () => {
+    // });
+
+    // it("should return false for non-matching passwords", async () => {
+    // });
   });
 });
