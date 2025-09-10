@@ -5,6 +5,8 @@ import bcrypt from "bcrypt";
 import { authConfig } from "../config/auth.js";
 import jwt from "jsonwebtoken";
 import { ApiError } from "../middlewares/errorHandler.js";
+import { addUser, getAllUsers } from "../dal/usersDAL.js";
+
 // Configuration constants
 const BCRYPT_SALT_ROUNDS = authConfig.bcryptSaltRounds;
 const DEFAULT_TOKEN_EXPIRATION = authConfig.jwtExpiresIn;
@@ -102,4 +104,104 @@ function verifyToken(token) {
   }
 }
 
-export { hashPassword, comparePassword, generateToken, verifyToken };
+/**
+ * Register a new user
+ *
+ * @param {string} username - Username
+ * @param {string} password - Password
+ * @returns {Promise<Object>} - User object with token
+ * @throws {ApiError} - If registration fails
+ */
+async function registerUser(username, password) {
+  // Input validation
+  if (!username || !password) throw new ApiError(400, "Username and password are required");
+
+  if (username.length < 3) throw new ApiError(400, "Username must be at least 3 characters long");
+  if (password.length < 6) throw new ApiError(400, "Password must be at least 6 characters long");
+
+  try {
+    // Check if username already exists
+    const users = await getAllUsers();
+
+    const existingUser = users.find((user) => user.username === username);
+
+    if (existingUser) throw new ApiError(409, "Username already exists");
+
+    // Hash the password
+    const passwordHash = await hashPassword(password);
+
+    // Create user in database
+    const newUser = await addUser({
+      username,
+      password_hash: passwordHash,
+    });
+
+    // Generate token
+    const token = generateToken(newUser);
+
+    return {
+      user: {
+        id: newUser.id,
+        username: newUser.username,
+        role: newUser.role,
+      },
+      token,
+    };
+  } catch (error) {
+    if (error instanceof ApiError) {
+      throw error;
+    }
+    throw new ApiError(500, "Registration failed: " + error.message);
+  }
+}
+
+/**
+ * Login a user with username and password
+ *
+ * @param {string} username - Username
+ * @param {string} password - Password
+ * @returns {Promise<Object>} - User object with token
+ * @throws {ApiError} - If login fails
+ */
+async function loginUser(username, password) {
+  // Input validation
+  if (!username || !password) throw new ApiError(400, "Username and password are required");
+
+  try {
+    // Find user by username
+    const users = await getAllUsers();
+
+    const existingUser = users.find((user) => user.username === username);
+
+    // Check if user exist
+    if (!existingUser) throw new ApiError(401, "Invalid username or password");
+
+    // Check if user has a password
+    if (!existingUser.password_hash)
+      throw new ApiError(401, "User exists but has no password set. Please contact administrator.");
+
+    // Verify password
+    const isPasswordValid = await comparePassword(password, existingUser.password_hash);
+    if (!isPasswordValid) {
+      throw new ApiError(401, "Invalid username or password");
+    }
+
+    // Generate token
+    const token = generateToken(existingUser);
+
+    return {
+      user: {
+        id: existingUser.id,
+        username: existingUser.username,
+      },
+      token,
+    };
+  } catch (error) {
+    if (error instanceof ApiError) {
+      throw error;
+    }
+    throw new ApiError(500, "Login failed: " + error.message);
+  }
+}
+
+export { hashPassword, comparePassword, generateToken, verifyToken, registerUser, loginUser };
