@@ -3,7 +3,7 @@
  * Handles HTTP requests for user authentication and authorization
  * Implements clean API design with proper error handling
  */
-import { catchAsync, ApiError } from "../middleware/errorHandler.js";
+import { catchAsync } from "../middlewares/errorHandler.js";
 import * as authService from "../services/authService.js";
 import { serverConfig } from "../config/server.js";
 
