@@ -1,5 +1,5 @@
-import { useNavigate } from "react-router-dom";
 import "./NewPostPage.css";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { creaetNewPost } from "../services/postService";
 
@@ -36,37 +36,44 @@ export default () => {
   return (
     <div id="new-post">
       <h2>Add New Post</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="author">Author</label>
-        <input
-          type="text"
-          id="author"
-          value={author}
-          onChange={({ target }) => setAuthor(target.value)}
-          placeholder="Enter author: "
-          minLength={2}
-          required
-        />
-        <label htmlFor="description">Description</label>
-        <input
-          type="text"
-          id="description"
-          value={description}
-          onChange={({ target }) => setDescription(target.value)}
-          placeholder="Enter description: "
-          minLength={10}
-          required
-        />
-        <label htmlFor="imgPath">Image Path</label>
-        <input
-          type="text"
-          id="imgPath"
-          value={imgPath}
-          onChange={({ target }) => setImgPath(target.value)}
-          placeholder="Enter imgPath: "
-          required
-        />
-        <button type="submit">Publish Post</button>
+      <form id="new-post--form" onSubmit={handleSubmit}>
+        <span>
+          <label htmlFor="author">Author</label>
+          <input
+            type="text"
+            id="author"
+            value={author}
+            onChange={({ target }) => setAuthor(target.value)}
+            placeholder="Enter author: "
+            minLength={2}
+            required
+          />
+        </span>
+        <span>
+          <label htmlFor="description">Description</label>
+          <input
+            type="text"
+            id="description"
+            value={description}
+            onChange={({ target }) => setDescription(target.value)}
+            placeholder="Enter description: "
+            minLength={10}
+            required
+          />
+        </span>
+        <span>
+          <label htmlFor="imgPath">Image Path</label>
+          <input
+            type="text"
+            id="imgPath"
+            value={imgPath}
+            onChange={({ target }) => setImgPath(target.value)}
+            placeholder="Enter imgPath: "
+            required
+          />
+        </span>
+
+        <button className="btn" type="submit">Publish Post</button>
       </form>
       {error && <p className="error">{error}</p>}
     </div>
