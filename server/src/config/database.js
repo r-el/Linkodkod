@@ -14,8 +14,9 @@ const __dirname = path.dirname(__filename);
  * Database configuration
  */
 export const databaseConfig = {
-  // Path to the posts JSON file
+  // Path to the JSON files
   postsFilePath: path.join(__dirname, "../../data/posts.json"),
+  usersFilePath: path.join(__dirname, "../../data/users.json"),
 
   // json-file-crud options
   options: {
