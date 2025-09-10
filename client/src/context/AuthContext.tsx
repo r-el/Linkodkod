@@ -1,11 +1,12 @@
 import React, { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import { loginUser } from "../services/authService";
+import { loginUser, registerUser } from "../services/authService";
 import type { IUser } from "../@types/User";
 
 interface AuthContextType {
   user: IUser | null;
   isAuthenticated: boolean;
   login: (username: string, password: string) => Promise<{ success: boolean; user?: IUser; error?: any }>;
+  register: (username: string, password: string) => Promise<{ success: boolean; user?: IUser; error?: any }>;
 }
 
 interface AuthProviderProps {
@@ -73,7 +74,46 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  const value = { user, isAuthenticated, login };
+  // Register function
+  const register = async (username: string, password: string) => {
+    try {
+      const response = await registerUser({ username, password });
+
+      if (response.success && response.data) {
+        const { user: userData, token } = response.data;
+
+        setUser(userData);
+        setIsAuthenticated(true);
+
+        // Store in localStorage
+        localStorage.setItem("user", JSON.stringify(userData));
+        localStorage.setItem("token", token);
+
+        return { success: true, user: userData };
+      } else {
+        throw new Error(response.message || "Registration failed");
+      }
+    } catch (error: any) {
+      console.error("Register error:", error);
+
+      // Handle specific error responses from server
+      if (error.response && error.response.data) {
+        const errorMessage =
+          error.response.data.error || error.response.data.message || "Registration failed";
+        return {
+          success: false,
+          error: { message: errorMessage },
+        };
+      }
+
+      return {
+        success: false,
+        error: { message: error.message || "Registration error" },
+      };
+    }
+  };
+
+  const value = { user, isAuthenticated, login, register };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
