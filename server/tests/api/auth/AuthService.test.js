@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import * as authService from "../../../src/services/authService.js";
 import bcrypt from "bcrypt";
+import authConfig from "../../../src/config/auth.js";
 
 describe("Authentication Service", () => {
   describe("hashPassword", () => {
@@ -88,5 +89,28 @@ describe("Authentication Service", () => {
 
     // it("should return false for non-matching passwords", async () => {
     // });
+  });
+
+  describe("generateToken", () => {
+    it("should throw error for invalid user object", () => {
+      // Act & Assert
+      expect(() => authService.generateToken({})).toThrow("User object must contain id and username");
+      expect(authService.generateToken({ id: 1 })).toThrow("User object must contain id and username");
+      expect(authService.generateToken({ id: "" })).toThrow("User object must contain id and username");
+      expect(authService.generateToken({ username: "" })).toThrow("User object must contain id and username");
+      expect(authService.generateToken({ username: "user" })).toThrow(
+        "User object must contain id and username"
+      );
+    });
+    it("should throw if JWT_SECRET not configured in environment variables", () => {
+      // Arrange
+      const tmpJwtSecret = authConfig.jwtSecret;
+      authConfig.jwtSecret = "";
+      // Act & Assert
+      expect(authService.generateToken({ id: 1, username: "User" })).toThrow(
+        "JWT_SECRET not configured in environment variables"
+      );
+      authConfig.jwtSecret = tmpJwtSecret;
+    });
   });
 });
