@@ -18,7 +18,16 @@ describe("Authentication Service", () => {
   });
 
   describe("hashPassword", () => {
-    it("should hash password successfully", async () => {
+    it("should throw error for empty password", async () => {
+      await expect(authService.hashPassword("")).rejects.toThrow("Password cannot be empty");
+    });
+
+    it("should throw error for non-string password", async () => {
+      // Act & Assert
+      await expect(authService.hashPassword(123)).rejects.toThrow("Password must be type of string");
+    });
+
+    it("should hash password successfully [mockResolvedValue]", async () => {
       // Arrange
       const password = "testpassword123";
       const hashedPassword = "$2b$10$hashedversion1234567890123456789012345678901234567890";
@@ -30,15 +39,6 @@ describe("Authentication Service", () => {
       // Assert
       expect(bcrypt.hash).toHaveBeenCalledWith(password, process.env.BCRYPT_SALT_ROUNDS);
       expect(result).toBe(hashedPassword);
-    });
-
-    it("should throw error for empty password", async () => {
-      await expect(authService.hashPassword("")).rejects.toThrow("The password cannot be empty");
-    });
-
-    it("should throw error for non-string password", async () => {
-      // Act & Assert
-      await expect(authService.hashPassword(123)).rejects.toThrow("The password must be type of string");
     });
 
     it("should handle bcrypt errors", async () => {
