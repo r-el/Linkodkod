@@ -25,3 +25,7 @@ To run test for the server, run the following command:
 ```bash
 npm test
 ```
+
+## Validation
+
+The validation of posts are procces in the routes using middlwares before the controlles function
