@@ -24,6 +24,17 @@ describe("Authentication Service", () => {
       expect(hashedPassword).toBeTypeOf("string");
     });
 
+    it("should return hash string with 60 characters length", async () => {
+      // Arrange
+      const plainPassword = "testpassword123";
+
+      // Act
+      const hashedPassword = await authService.hashPassword(plainPassword);
+
+      // Assert
+      expect(hashedPassword.length).toBe(60);
+    });
+
     it("should hash password successfully", async () => {
       // Arrange
       const plainPassword = "testpassword123";
