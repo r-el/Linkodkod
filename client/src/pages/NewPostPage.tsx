@@ -73,7 +73,7 @@ export default () => {
           />
         </span>
 
-        <button type="submit">Publish Post</button>
+        <button className="btn" type="submit">Publish Post</button>
       </form>
       {error && <p className="error">{error}</p>}
     </div>
