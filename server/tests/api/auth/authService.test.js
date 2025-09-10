@@ -37,7 +37,7 @@ describe("Authentication Service", () => {
       const result = await authService.hashPassword(password);
 
       // Assert
-      expect(bcrypt.hash).toHaveBeenCalledWith(password, process.env.BCRYPT_SALT_ROUNDS);
+      expect(bcrypt.hash).toHaveBeenCalledWith(password, authConfig.bcryptSaltRounds);
       expect(result).toBe(hashedPassword);
     });
 
