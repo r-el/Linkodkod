@@ -3,6 +3,10 @@ import * as authService from "../../../../src/services/authService.js";
 import bcrypt from "bcrypt";
 
 describe("Hash Password", () => {
+  it("should throw error for empty password", async () => {
+    await expect(authService.hashPassword("")).rejects.toThrow("Password cannot be empty");
+  });
+
   it("should hash password successfully", async () => {
     // Arrange
     const plainPassword = "testpassword123";
