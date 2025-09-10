@@ -5,6 +5,7 @@
 import { describe, expect, beforeEach, it, vi } from "vitest";
 import bcrypt from "bcrypt";
 import * as authService from "../../../src/services/authService.js";
+import authConfig from "../../../src/config/auth.js";
 
 // Mock dependencies
 vi.mock("bcrypt");
@@ -27,7 +28,7 @@ describe("Authentication Service", () => {
       await expect(authService.hashPassword(123)).rejects.toThrow("Password must be type of string");
     });
 
-    it("should hash password successfully [mockResolvedValue]", async () => {
+    it("should hash password successfully", async () => {
       // Arrange
       const password = "testpassword123";
       const hashedPassword = "$2b$10$hashedversion1234567890123456789012345678901234567890";
@@ -43,11 +44,11 @@ describe("Authentication Service", () => {
 
     it("should handle bcrypt errors", async () => {
       // Arrange
-      bcrypt.hash.mockRejectedValue(new Error("Bcrypt error"));
+      bcrypt.hash.mockRejectedValue(new Error("Testing Bcrypt error"));
 
       // Act & Assert
       await expect(authService.hashPassword("password")).rejects.toThrow(
-        "Failed to hash password: Bcrypt error"
+        "Failed to hash password: Testing Bcrypt error"
       );
     });
   });
